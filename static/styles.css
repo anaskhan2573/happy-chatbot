@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #f9d29d 0%, #ffd8cb 100%);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.container {
+    width: 400px;
+    max-height: 90vh;
+    background: #ffffffaa;
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    text-align: center;
+    padding: 20px;
+    font-size: 26px;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scrollbar-width: thin;
+    scrollbar-color: #ff9a9e #ffe0e9;
+}
+
+.chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-box::-webkit-scrollbar-thumb {
+    background: #ff9a9e;
+    border-radius: 10px;
+}
+
+.chat-input {
+    display: flex;
+    padding: 15px;
+    background: #ffe0e9;
+    gap: 10px;
+    align-items: center;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 12px 20px;
+    border-radius: 30px;
+    border: 2px solid #ff9a9e;
+    font-size: 16px;
+    outline: none;
+    background: #fffafa;
+}
+
+.chat-input button {
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.chat-input button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #ff6a88, #ff99ac);
+}
+
+.user-message, .bot-message {
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 80%;
+    font-size: 16px;
+    line-height: 1.4;
+    position: relative;
+    animation: fadeInUp 0.5s ease both;
+}
+
+.user-message {
+    background: #ff9a9e;
+    color: white;
+    align-self: flex-end;
+}
+
+.bot-message {
+    background: #6a82fb;
+    color: white;
+    align-self: flex-start;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Background Bubbles (Optional) */
+.bubble {
+    position: absolute;
+    background: rgba(255, 182, 193, 0.3);
+    border-radius: 50%;
+    animation: float 20s infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    50% {
+        transform: translateY(-100px) translateX(50px);
+    }
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+}

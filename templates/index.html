@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy AI Chatbot</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <!-- Background bubbles -->
+    <div class="bubble" style="width: 80px; height: 80px; left: 10%; bottom: 10%;"></div>
+    <div class="bubble" style="width: 60px; height: 60px; left: 80%; bottom: 20%;"></div>
+    <div class="bubble" style="width: 100px; height: 100px; left: 50%; bottom: 5%;"></div>
+    <div class="bubble" style="width: 50px; height: 50px; left: 30%; bottom: 15%;"></div>
+
+    <div class="container">
+        <header class="chat-header">🌸 Happy AI Chatbot 🌟</header>
+
+
+        <div id="chat-box" class="chat-box"></div>
+
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Ask me anything..." autofocus>
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const chatBox = document.getElementById('chat-box');
+
+            const userText = input.value.trim();
+            if (userText === "") return;
+
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'user-message';
+            userMessage.innerText = userText;
+            chatBox.appendChild(userMessage);
+
+            input.value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Show loading message
+            const loadingMessage = document.createElement('div');
+            loadingMessage.className = 'bot-message';
+            loadingMessage.innerText = 'Thinking... 🤔';
+            chatBox.appendChild(loadingMessage);
+
+            try {
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: userText })
+                });
+
+                const data = await response.json();
+                loadingMessage.innerText = data.response;
+            } catch (error) {
+                loadingMessage.innerText = 'Error getting reply!';
+            }
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
