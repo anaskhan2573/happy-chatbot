@@ -21,12 +21,16 @@ def get_openrouter_response(user_message):
         ]
     }
 
+  
     response = requests.post(url, headers=headers, json=payload)
-    result = response.json()
-    try:
-        return result['choices'][0]['message']['content']
-    except Exception as e:
-        return f"Error: {str(e)}"
+    data = response.json()
+
+    if 'choices' in data:
+        reply = data['choices'][0]['message']['content']
+    else:
+        print("API error:", data)
+        reply = "Sorry, there was an error: " + str(data.get('error', 'Unknown error'))
+
 
 @app.route("/")
 def home():
