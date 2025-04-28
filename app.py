@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 # Your OpenRouter API Key
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 
 def get_openrouter_response(user_message):
     url = "https://openrouter.ai/api/v1/chat/completions"
